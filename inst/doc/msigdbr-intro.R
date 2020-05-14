@@ -21,6 +21,9 @@ msigdbr_show_species()
 m_df = msigdbr(species = "Homo sapiens")
 head(m_df)
 
+## ----show-collections-------------------------------------------------------------------
+m_df %>% dplyr::distinct(gs_cat, gs_subcat) %>% dplyr::arrange(gs_cat, gs_subcat)
+
 ## ----get-mouse-h------------------------------------------------------------------------
 m_df = msigdbr(species = "Mus musculus", category = "H")
 head(m_df)

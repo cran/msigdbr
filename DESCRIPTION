@@ -1,7 +1,7 @@
 Package: msigdbr
 Type: Package
 Title: MSigDB Gene Sets for Multiple Organisms in a Tidy Data Format
-Version: 7.0.1
+Version: 7.1.1
 Authors@R: person("Igor", "Dolgalev", email = "igor.dolgalev@nyumc.org", role = c("aut", "cre"))
 Description: Provides the 'Molecular Signatures Database' (MSigDB) gene sets
     typically used with the 'Gene Set Enrichment Analysis' (GSEA) software
@@ -18,11 +18,11 @@ LazyData: true
 Depends: R (>= 3.2.0)
 Imports: magrittr, rlang, dplyr (>= 0.7.0), tibble
 Suggests: testthat, knitr, rmarkdown
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-09-04 01:42:20 UTC; id460
+Packaged: 2020-05-13 19:46:01 UTC; id460
 Author: Igor Dolgalev [aut, cre]
 Maintainer: Igor Dolgalev <igor.dolgalev@nyumc.org>
 Repository: CRAN
-Date/Publication: 2019-09-04 05:10:15 UTC
+Date/Publication: 2020-05-14 05:30:03 UTC
