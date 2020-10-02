@@ -1,24 +1,58 @@
 
 #' List the species available in the msigdbr package
 #'
-#' @return A vector of possible species.
+#' @return A data frame of the available species.
 #'
-#' @importFrom dplyr pull
+#' @importFrom dplyr arrange distinct select
+#' @importFrom tidyselect starts_with
 #' @export
 #'
 #' @examples
-#' msigdbr_show_species()
-msigdbr_show_species <- function() {
+#' msigdbr_species()
+msigdbr_species <- function() {
   msigdbr_orthologs %>%
-    pull(.data$species_name) %>%
+    select(starts_with("species")) %>%
+    distinct() %>%
+    arrange(.data$species_name)
+}
+
+#' List the species available in the msigdbr package
+#'
+#' This function is being deprecated and replaced by `msigdbr_species()`.
+#'
+#' @return A vector of possible species.
+#'
+#' @export
+msigdbr_show_species <- function() {
+  .Deprecated("msigdbr_species")
+  msigdbr_orthologs$species_name %>%
     unique() %>%
     sort()
 }
 
-#' Retrieve the msigdbr data frame
+#' List the collections available in the msigdbr package
 #'
-#' @param species Species name, such as Homo sapiens or Mus musculus. The available species can be retrieved with `msigdbr_show_species()`.
-#' @param category MSigDB collection abbreviation, such as H, C1, C2, C3, C4, C5, C6, C7.
+#' @return A data frame of the available collections.
+#'
+#' @importFrom dplyr arrange count distinct
+#' @export
+#'
+#' @examples
+#' msigdbr_collections()
+msigdbr_collections <- function() {
+  msigdbr_genesets %>%
+    distinct(.data$gs_cat, .data$gs_subcat, .data$gs_id) %>%
+    count(.data$gs_cat, .data$gs_subcat, name = "num_genesets") %>%
+    arrange(.data$gs_cat, .data$gs_subcat)
+}
+
+#' Retrieve the gene sets data frame
+#'
+#' Retrieve a data frame of gene sets and their member genes.
+#' The available species and collections can be checked with `msigdbr_species()` and `msigdbr_collections()`.
+#'
+#' @param species Species name, such as Homo sapiens or Mus musculus.
+#' @param category MSigDB collection abbreviation, such as H or C1.
 #' @param subcategory MSigDB sub-collection abbreviation, such as CGP or BP.
 #'
 #' @return A data frame of gene sets with one gene per row.
@@ -27,6 +61,7 @@ msigdbr_show_species <- function() {
 #'
 #' @import tibble
 #' @importFrom dplyr filter inner_join arrange select
+#' @importFrom tidyselect everything
 #' @export
 #'
 #' @examples
@@ -35,9 +70,6 @@ msigdbr_show_species <- function() {
 #'
 #' # get mouse C2 (curated) CGP (chemical and genetic perturbations) gene sets
 #' \donttest{msigdbr(species = "Mus musculus", category = "C2", subcategory = "CGP")}
-#'
-#' # check all the available categories and sub-categories
-#' \donttest{msigdbr() %>% dplyr::distinct(gs_cat, gs_subcat) %>% dplyr::arrange(gs_cat, gs_subcat)}
 msigdbr <- function(species = "Homo sapiens", category = NULL, subcategory = NULL) {
 
   # confirm that only one species is specified
@@ -60,15 +92,25 @@ msigdbr <- function(species = "Homo sapiens", category = NULL, subcategory = NUL
     if (length(category) > 1) {
       stop("please specify only one category at a time")
     }
-    genesets_subset <- filter(genesets_subset, .data$gs_cat == category)
+    if (category %in% genesets_subset$gs_cat) {
+      genesets_subset <- filter(genesets_subset, .data$gs_cat == category)
+    } else {
+      stop("unknown category")
+    }
   }
 
-  # filter by sub-category
+  # filter by sub-category (with and without colon)
   if (is.character(subcategory)) {
     if (length(subcategory) > 1) {
       stop("please specify only one subcategory at a time")
     }
-    genesets_subset <- filter(genesets_subset, .data$gs_subcat == subcategory)
+    if (subcategory %in% genesets_subset$gs_subcat) {
+      genesets_subset <- filter(genesets_subset, .data$gs_subcat == subcategory)
+    } else if (subcategory %in% gsub(".*:", "", genesets_subset$gs_subcat)){
+      genesets_subset <- filter(genesets_subset, gsub(".*:", "", .data$gs_subcat) == subcategory)
+    } else {
+      stop("unknown subcategory")
+    }
   }
 
   # combine gene sets and genes
@@ -77,6 +119,15 @@ msigdbr <- function(species = "Homo sapiens", category = NULL, subcategory = NUL
   # combine gene sets and orthologs
   genesets_subset %>%
     inner_join(orthologs_subset, by = "human_entrez_gene") %>%
-    arrange(.data$gs_name, .data$human_gene_symbol) %>%
-    select(-.data$human_entrez_gene, -.data$num_sources)
+    arrange(.data$gs_name, .data$human_gene_symbol, .data$gene_symbol) %>%
+    select(
+      .data$gs_cat,
+      .data$gs_subcat,
+      .data$gs_name,
+      .data$entrez_gene,
+      .data$gene_symbol,
+      .data$human_entrez_gene,
+      .data$human_gene_symbol,
+      everything()
+    )
 }

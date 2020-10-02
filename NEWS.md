@@ -1,3 +1,10 @@
+# msigdbr 7.2.1
+
+* Based on MSigDB v7.2 release.
+* Added more annotation fields to the returned gene sets.
+* Added `msigdbr_species()` as an alternative to `msigdbr_show_species()`.
+* Added `msigdbr_collections()`.
+
 # msigdbr 7.1.1
 
 * Based on MSigDB v7.1 release.

@@ -5,8 +5,10 @@ knitr::opts_chunk$set(
 )
 # increase the screen width
 options(width = 90)
-# reduce the minimum number of characters for the tibble column titles
-options(pillar.min_title_chars = 8)
+# reduce the minimum number of characters for the tibble column titles (default: 15)
+options(pillar.min_title_chars = 10)
+# increase the maximum number of rows printed (default: 20)
+options(tibble.print_max = 25)
 
 ## ----install-package, eval=FALSE--------------------------------------------------------
 #  install.packages("msigdbr")
@@ -14,37 +16,42 @@ options(pillar.min_title_chars = 8)
 ## ----load-package, message=FALSE--------------------------------------------------------
 library(msigdbr)
 
-## ----show-species-----------------------------------------------------------------------
-msigdbr_show_species()
-
 ## ----get-human-all----------------------------------------------------------------------
-m_df = msigdbr(species = "Homo sapiens")
-head(m_df)
+all_gene_sets = msigdbr(species = "Mus musculus")
+head(all_gene_sets)
 
-## ----show-collections-------------------------------------------------------------------
-m_df %>% dplyr::distinct(gs_cat, gs_subcat) %>% dplyr::arrange(gs_cat, gs_subcat)
+## ----species----------------------------------------------------------------------------
+msigdbr_species()
 
-## ----get-mouse-h------------------------------------------------------------------------
-m_df = msigdbr(species = "Mus musculus", category = "H")
-head(m_df)
+## ----get-human-h------------------------------------------------------------------------
+h_gene_sets = msigdbr(species = "Mus musculus", category = "H")
+head(h_gene_sets)
 
 ## ----get-mouse-c2-----------------------------------------------------------------------
-m_df = msigdbr(species = "Mus musculus", category = "C2", subcategory = "CGP")
-head(m_df)
+cgp_gene_sets = msigdbr(species = "Mus musculus", category = "C2", subcategory = "CGP")
+head(cgp_gene_sets)
 
-## ----get-mouse-h-filter-----------------------------------------------------------------
-m_df = msigdbr(species = "Mus musculus") %>% dplyr::filter(gs_cat == "H")
-head(m_df)
+## ----collections------------------------------------------------------------------------
+msigdbr_collections()
+
+## ----get-human-h-filter-----------------------------------------------------------------
+all_gene_sets %>%
+  dplyr::filter(gs_cat == "H") %>%
+  head()
 
 ## ----cp-entrez, eval=FALSE--------------------------------------------------------------
-#  m_t2g = m_df %>% dplyr::select(gs_name, entrez_gene) %>% as.data.frame()
-#  enricher(gene = gene_ids_vector, TERM2GENE = m_t2g, ...)
+#  msigdbr_t2g = msigdbr_df %>% dplyr::select(gs_name, entrez_gene) %>% as.data.frame()
+#  enricher(gene = gene_ids_vector, TERM2GENE = msigdbr_t2g, ...)
 
 ## ----cp-symbols, eval=FALSE-------------------------------------------------------------
-#  m_t2g = m_df %>% dplyr::select(gs_name, gene_symbol) %>% as.data.frame()
-#  enricher(gene = gene_symbols_vector, TERM2GENE = m_t2g, ...)
+#  msigdbr_t2g = msigdbr_df %>% dplyr::select(gs_name, gene_symbol) %>% as.data.frame()
+#  enricher(gene = gene_symbols_vector, TERM2GENE = msigdbr_t2g, ...)
 
 ## ----fgsea, eval=FALSE------------------------------------------------------------------
-#  m_list = m_df %>% split(x = .$gene_symbol, f = .$gs_name)
-#  fgsea(pathways = m_list, ...)
+#  msigdbr_list = split(x = msigdbr_df$gene_symbol, f = msigdbr_df$gs_name)
+#  fgsea(pathways = msigdbr_list, ...)
+
+## ----gsva, eval=FALSE-------------------------------------------------------------------
+#  msigdbr_list = split(x = msigdbr_df$gene_symbol, f = msigdbr_df$gs_name)
+#  gsva(gset.idx.list = msigdbr_list, ...)
 
