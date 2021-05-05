@@ -2,10 +2,9 @@ library(msigdbr)
 library(dplyr)
 
 test_that("msigdbr_species()", {
-  species = msigdbr_species()
+  species <- msigdbr_species()
   expect_s3_class(species, "tbl_df")
-  expect_gt(nrow(species), 5)
-  expect_lt(nrow(species), 15)
+  expect_equal(nrow(species), 20)
   expect_match(species$species_name, "Homo sapiens", fixed = TRUE, all = FALSE)
   expect_match(species$species_name, "Mus musculus", fixed = TRUE, all = FALSE)
   expect_match(species$species_name, "Drosophila melanogaster", fixed = TRUE, all = FALSE)
@@ -16,9 +15,9 @@ test_that("msigdbr_show_species()", {
 })
 
 test_that("msigdbr_collections()", {
-  collections = msigdbr_collections()
+  collections <- msigdbr_collections()
   expect_s3_class(collections, "tbl_df")
-  expect_gt(nrow(collections), 10)
+  expect_gt(nrow(collections), 20)
   expect_lt(nrow(collections), 25)
   expect_match(collections$gs_cat, "C2", fixed = TRUE, all = FALSE)
   expect_match(collections$gs_cat, "C7", fixed = TRUE, all = FALSE)
@@ -26,23 +25,47 @@ test_that("msigdbr_collections()", {
   expect_match(collections$gs_subcat, "CP:REACTOME", fixed = TRUE, all = FALSE)
 })
 
-test_that("all gene sets default", {
-  msigdbr_hs = msigdbr()
+test_that("human gene sets overall stats", {
+  msigdbr_hs <- msigdbr()
   expect_s3_class(msigdbr_hs, "tbl_df")
-  expect_gt(nrow(msigdbr_hs), 100000)
+  expect_identical(msigdbr_hs, msigdbr(species = "human"))
+  expect_gt(nrow(msigdbr_hs), 4200000)
+  expect_identical(colnames(msigdbr_hs)[1:6], c("gs_cat", "gs_subcat", "gs_name", "gene_symbol", "entrez_gene", "ensembl_gene"))
+  expect_gt(n_distinct(msigdbr_hs$gene_symbol), 39000)
+  expect_gt(n_distinct(msigdbr_hs$entrez_gene), 39000)
+  expect_gt(n_distinct(msigdbr_hs$ensembl_gene), 39000)
   expect_equal(min(rle(msigdbr_hs$gs_id)$lengths), 5)
-  expect_lt(max(rle(msigdbr_hs$gs_id)$lengths), 2000)
+  expect_lt(max(rle(msigdbr_hs$gs_id)$lengths), 2500)
+  msigdbr_hs_sym <- distinct(msigdbr_hs, gs_id, gene_symbol)
+  expect_gt(nrow(msigdbr_hs_sym), 3800000)
+  expect_lt(max(rle(msigdbr_hs_sym$gs_id)$lengths), 2005)
 })
 
-test_that("all gene sets mouse", {
-  msigdbr_mm = msigdbr(species = "Mus musculus")
+test_that("mouse gene sets overall stats", {
+  msigdbr_mm <- msigdbr(species = "Mus musculus")
   expect_s3_class(msigdbr_mm, "tbl_df")
-  expect_gt(nrow(msigdbr_mm), 100000)
-  expect_lt(max(msigdbr_mm$num_ortholog_sources), 15)
+  expect_identical(msigdbr_mm, msigdbr(species = "mouse"))
+  expect_gt(nrow(msigdbr_mm), 3800000)
+  expect_identical(colnames(msigdbr_mm)[1:6], c("gs_cat", "gs_subcat", "gs_name", "gene_symbol", "entrez_gene", "ensembl_gene"))
+  expect_gt(n_distinct(msigdbr_mm$human_gene_symbol), 19000)
+  expect_gt(n_distinct(msigdbr_mm$gene_symbol), 18000)
+  expect_gt(n_distinct(msigdbr_mm$entrez_gene), 18000)
+  expect_gt(n_distinct(msigdbr_mm$ensembl_gene), 18000)
+  expect_equal(max(msigdbr_mm$num_ortholog_sources), 12)
+})
+
+test_that("rat gene sets overall stats", {
+  msigdbr_rn <- msigdbr(species = "Rattus norvegicus")
+  expect_s3_class(msigdbr_rn, "tbl_df")
+  expect_identical(msigdbr_rn, msigdbr(species = "rat"))
+  expect_gt(nrow(msigdbr_rn), 3700000)
+  expect_gt(n_distinct(msigdbr_rn$human_gene_symbol), 15000)
+  expect_gt(n_distinct(msigdbr_rn$gene_symbol), 15000)
+  expect_equal(max(msigdbr_rn$num_ortholog_sources), 10)
 })
 
 test_that("human hallmark category", {
-  msigdbr_hs_h = msigdbr(species = "Homo sapiens", category = "H")
+  msigdbr_hs_h <- msigdbr(species = "Homo sapiens", category = "H")
   expect_s3_class(msigdbr_hs_h, "tbl_df")
   expect_gt(nrow(msigdbr_hs_h), 5000)
   expect_equal(length(unique(msigdbr_hs_h$gs_cat)), 1)
@@ -51,7 +74,7 @@ test_that("human hallmark category", {
 })
 
 test_that("mouse hallmark category", {
-  msigdbr_mm_h = msigdbr(species = "Mus musculus", category = "H")
+  msigdbr_mm_h <- msigdbr(species = "Mus musculus", category = "H")
   expect_s3_class(msigdbr_mm_h, "tbl_df")
   expect_gt(nrow(msigdbr_mm_h), 5000)
   expect_equal(length(unique(msigdbr_mm_h$gs_cat)), 1)
@@ -60,7 +83,7 @@ test_that("mouse hallmark category", {
 })
 
 test_that("human CGP subcategory", {
-  msigdbr_hs_cgp = msigdbr(species = "Homo sapiens", category = "C2", subcategory = "CGP")
+  msigdbr_hs_cgp <- msigdbr(species = "Homo sapiens", category = "C2", subcategory = "CGP")
   expect_s3_class(msigdbr_hs_cgp, "tbl_df")
   expect_gt(nrow(msigdbr_hs_cgp), 100000)
   expect_equal(length(unique(msigdbr_hs_cgp$gs_cat)), 1)
@@ -70,7 +93,7 @@ test_that("human CGP subcategory", {
 })
 
 test_that("human BP subcategory", {
-  msigdbr_hs_bp = msigdbr(species = "Homo sapiens", category = "C5", subcategory = "BP")
+  msigdbr_hs_bp <- msigdbr(species = "Homo sapiens", category = "C5", subcategory = "BP")
   expect_s3_class(msigdbr_hs_bp, "tbl_df")
   expect_gt(nrow(msigdbr_hs_bp), 100000)
   expect_equal(length(unique(msigdbr_hs_bp$gs_cat)), 1)
@@ -80,7 +103,7 @@ test_that("human BP subcategory", {
 })
 
 test_that("rat BP subcategory", {
-  msigdbr_rn_bp = msigdbr(species = "Rattus norvegicus", category = "C5", subcategory = "BP")
+  msigdbr_rn_bp <- msigdbr(species = "Rattus norvegicus", category = "C5", subcategory = "BP")
   expect_s3_class(msigdbr_rn_bp, "tbl_df")
   expect_gt(nrow(msigdbr_rn_bp), 100000)
   expect_equal(length(unique(msigdbr_rn_bp$gs_cat)), 1)
@@ -90,27 +113,55 @@ test_that("rat BP subcategory", {
 })
 
 test_that("subcategory partial match", {
-  msigdbr_mm_gomf = msigdbr(species = "Mus musculus", category = "C5", subcategory = "GO:MF")
+  msigdbr_mm_gomf <- msigdbr(species = "Mus musculus", category = "C5", subcategory = "GO:MF")
   expect_s3_class(msigdbr_mm_gomf, "tbl_df")
-  msigdbr_mm_mf = msigdbr(species = "Mus musculus", category = "C5", subcategory = "MF")
+  msigdbr_mm_mf <- msigdbr(species = "Mus musculus", category = "C5", subcategory = "MF")
   expect_s3_class(msigdbr_mm_mf, "tbl_df")
   expect_equal(nrow(msigdbr_mm_gomf), nrow(msigdbr_mm_mf))
   expect_identical(msigdbr_mm_gomf, msigdbr_mm_mf)
 })
 
-test_that("specific genes present in msigdbr() data frame", {
-  msigdbr_hs = msigdbr()
+test_that("specific genes present", {
+  msigdbr_hs <- msigdbr()
   expect_gt(nrow(filter(msigdbr_hs, gene_symbol == "NRAS")), 100)
   expect_gt(nrow(filter(msigdbr_hs, gene_symbol == "PIK3CA")), 100)
   expect_equal(nrow(filter(msigdbr_hs, gs_id == "M30055", gene_symbol == "FOS")), 1)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M30055", entrez_gene == 2353)), 1)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M30055", ensembl_gene == "ENSG00000170345")), 1)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M40827", gene_symbol == "ABCA11P")), 1)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M40827", entrez_gene == 79963)), 1)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M40827", ensembl_gene == "ENSG00000251595")), 1)
   expect_equal(nrow(filter(msigdbr_hs, gs_id == "M8918", gene_symbol == "NEPNP")), 1)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M8918", entrez_gene == 442253)), 1)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M8918", ensembl_gene == "ENSG00000218233")), 1)
 })
 
-#
+test_that("number of genes in specific gene sets", {
+  msigdbr_hs <- msigdbr()
+  msigdbr_hs_sym <- distinct(msigdbr_hs, gs_id, gene_symbol)
+  msigdbr_mm <- msigdbr(species = "Mus musculus")
+  expect_equal(nrow(filter(msigdbr_hs_sym, gs_id == "M5902")), 161)
+  expect_equal(nrow(filter(msigdbr_mm, gs_id == "M5902")), 161)
+  expect_equal(nrow(filter(msigdbr_hs_sym, gs_id == "M5903")), 32)
+  expect_equal(nrow(filter(msigdbr_mm, gs_id == "M5903")), 32)
+  expect_equal(nrow(filter(msigdbr_hs_sym, gs_id == "M39207")), 5)
+  expect_equal(nrow(filter(msigdbr_mm, gs_id == "M39207")), 5)
+  expect_equal(nrow(filter(msigdbr_hs_sym, gs_id == "M40020")), 12)
+  expect_equal(nrow(filter(msigdbr_mm, gs_id == "M40020")), 12)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M490")), 57)
+  expect_equal(nrow(filter(msigdbr_hs_sym, gs_id == "M490")), 55)
+  expect_equal(nrow(filter(msigdbr_mm, gs_id == "M490")), 55)
+  expect_equal(nrow(filter(msigdbr_hs, gs_id == "M40180")), 90)
+  expect_equal(nrow(filter(msigdbr_hs_sym, gs_id == "M40180")), 90)
+  expect_equal(nrow(filter(msigdbr_mm, gs_id == "M40180")), 88)
+})
+
 test_that("wrong msigdbr() parameters", {
   expect_error(msigdbr(species = "test"))
   expect_error(msigdbr(species = c("Homo sapiens", "Mus musculus")))
-  expect_error(msigdbr(species = "Homo sapiens", category = c("X")))
+  expect_error(msigdbr(species = "Homo sapiens", category = "X"))
+  expect_error(msigdbr(species = "Homo sapiens", category = "X", subcategory = "X"))
+  expect_error(msigdbr(species = "Homo sapiens", category = "H", subcategory = "H"))
   expect_error(msigdbr(species = "Homo sapiens", category = c("C1", "C2")))
   expect_error(msigdbr(species = "Homo sapiens", category = "C2", subcategory = c("CGP", "CP")))
 })
