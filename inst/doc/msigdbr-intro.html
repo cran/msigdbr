@@ -165,114 +165,114 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>All gene sets in the database can be retrieved without specifying a collection/category.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>all_gene_sets <span class="ot">=</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;Mus musculus&quot;</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(all_gene_sets)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 18</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat gs_name gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 C3     MIR:MIR_… AAACCA… Abcc4            239273 ENSMUSG000… ABCC4             10257</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 C3     MIR:MIR_… AAACCA… Abraxas2         109359 ENSMUSG000… ABRAXAS2          23172</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 C3     MIR:MIR_… AAACCA… Actn4             60595 ENSMUSG000… ACTN4                81</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 C3     MIR:MIR_… AAACCA… Acvr1             11477 ENSMUSG000… ACVR1                90</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 C3     MIR:MIR_… AAACCA… Adam9             11502 ENSMUSG000… ADAM9              8754</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 C3     MIR:MIR_… AAACCA… Adamts5           23794 ENSMUSG000… ADAMTS5           11096</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat     gs_name gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 C3     MIR:MIR_Lega… AAACCA… Abcc4            239273 ENSMUSG000… ABCC4             10257</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 C3     MIR:MIR_Lega… AAACCA… Abraxas2         109359 ENSMUSG000… ABRAXAS2          23172</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 C3     MIR:MIR_Lega… AAACCA… Actn4             60595 ENSMUSG000… ACTN4                81</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 C3     MIR:MIR_Lega… AAACCA… Acvr1             11477 ENSMUSG000… ACVR1                90</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 C3     MIR:MIR_Lega… AAACCA… Adam9             11502 ENSMUSG000… ADAM9              8754</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 C3     MIR:MIR_Lega… AAACCA… Adamts5           23794 ENSMUSG000… ADAMTS5           11096</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 10 more variables: human_ensembl_gene &lt;chr&gt;, gs_id &lt;chr&gt;, gs_pmid &lt;chr&gt;,</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   gs_geoid &lt;chr&gt;, gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;,</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   taxon_id &lt;int&gt;, ortholog_sources &lt;chr&gt;, num_ortholog_sources &lt;dbl&gt;</span></span></code></pre></div>
 <p>There is a helper function to show the available species. Either scientific or common names are acceptable.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">msigdbr_species</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 x 2</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    species_name                   species_common_name                                     </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                          &lt;chr&gt;                                                   </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Anolis carolinensis            Carolina anole, green anole                             </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Bos taurus                     bovine, cattle, cow, dairy cow, domestic cattle, domest…</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Caenorhabditis elegans         roundworm                                               </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Canis lupus familiaris         dog, dogs                                               </span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Danio rerio                    leopard danio, zebra danio, zebra fish, zebrafish       </span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Drosophila melanogaster        fruit fly                                               </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Equus caballus                 domestic horse, equine, horse                           </span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Felis catus                    cat, cats, domestic cat                                 </span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Gallus gallus                  bantam, chicken, chickens, Gallus domesticus            </span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Homo sapiens                   human                                                   </span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 Macaca mulatta                 rhesus macaque, rhesus macaques, Rhesus monkey, rhesus …</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 Monodelphis domestica          gray short-tailed opossum                               </span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 Mus musculus                   house mouse, mouse                                      </span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 Ornithorhynchus anatinus       duck-billed platypus, duckbill platypus, platypus       </span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 Pan troglodytes                chimpanzee                                              </span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 Rattus norvegicus              brown rat, Norway rat, rat, rats                        </span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 Saccharomyces cerevisiae       baker&#39;s yeast, brewer&#39;s yeast, S. cerevisiae            </span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 Schizosaccharomyces pombe 972… &lt;NA&gt;                                                    </span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 Sus scrofa                     pig, pigs, swine, wild boar                             </span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 Xenopus tropicalis             tropical clawed frog, western clawed frog</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 × 2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    species_name                    species_common_name                                    </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                           &lt;chr&gt;                                                  </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Anolis carolinensis             Carolina anole, green anole                            </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Bos taurus                      bovine, cattle, cow, dairy cow, domestic cattle, domes…</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Caenorhabditis elegans          &lt;NA&gt;                                                   </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Canis lupus familiaris          dog, dogs                                              </span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Danio rerio                     leopard danio, zebra danio, zebra fish, zebrafish      </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Drosophila melanogaster         fruit fly                                              </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Equus caballus                  domestic horse, equine, horse                          </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Felis catus                     cat, cats, domestic cat                                </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Gallus gallus                   bantam, chicken, chickens, Gallus domesticus           </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Homo sapiens                    human                                                  </span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 Macaca mulatta                  rhesus macaque, rhesus macaques, Rhesus monkey, rhesus…</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 Monodelphis domestica           gray short-tailed opossum                              </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 Mus musculus                    house mouse, mouse                                     </span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 Ornithorhynchus anatinus        duck-billed platypus, duckbill platypus, platypus      </span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 Pan troglodytes                 chimpanzee                                             </span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 Rattus norvegicus               brown rat, Norway rat, rat, rats                       </span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 Saccharomyces cerevisiae        baker&#39;s yeast, brewer&#39;s yeast, S. cerevisiae           </span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 Schizosaccharomyces pombe 972h- &lt;NA&gt;                                                   </span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 Sus scrofa                      pig, pigs, swine, wild boar                            </span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 Xenopus tropicalis              tropical clawed frog, western clawed frog</span></span></code></pre></div>
 <p>You can retrieve data for a specific collection, such as the hallmark gene sets.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>h_gene_sets <span class="ot">=</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;mouse&quot;</span>, <span class="at">category =</span> <span class="st">&quot;H&quot;</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(h_gene_sets)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 18</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat gs_name gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 H      &quot;&quot;        HALLMA… Abca1             11303 ENSMUSG000… ABCA1                19</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 H      &quot;&quot;        HALLMA… Abcb8             74610 ENSMUSG000… ABCB8             11194</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 H      &quot;&quot;        HALLMA… Acaa2             52538 ENSMUSG000… ACAA2             10449</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 H      &quot;&quot;        HALLMA… Acadl             11363 ENSMUSG000… ACADL                33</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 H      &quot;&quot;        HALLMA… Acadm             11364 ENSMUSG000… ACADM                34</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 H      &quot;&quot;        HALLMA… Acads             11409 ENSMUSG000… ACADS                35</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat gs_name     gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 H      &quot;&quot;        HALLMARK_A… Abca1             11303 ENSMUSG000… ABCA1                19</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 H      &quot;&quot;        HALLMARK_A… Abcb8             74610 ENSMUSG000… ABCB8             11194</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 H      &quot;&quot;        HALLMARK_A… Acaa2             52538 ENSMUSG000… ACAA2             10449</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 H      &quot;&quot;        HALLMARK_A… Acadl             11363 ENSMUSG000… ACADL                33</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 H      &quot;&quot;        HALLMARK_A… Acadm             11364 ENSMUSG000… ACADM                34</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 H      &quot;&quot;        HALLMARK_A… Acads             11409 ENSMUSG000… ACADS                35</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 10 more variables: human_ensembl_gene &lt;chr&gt;, gs_id &lt;chr&gt;, gs_pmid &lt;chr&gt;,</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   gs_geoid &lt;chr&gt;, gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;,</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   taxon_id &lt;int&gt;, ortholog_sources &lt;chr&gt;, num_ortholog_sources &lt;dbl&gt;</span></span></code></pre></div>
 <p>Retrieve mouse C2 (curated) CGP (chemical and genetic perturbations) gene sets.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cgp_gene_sets <span class="ot">=</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">&quot;mouse&quot;</span>, <span class="at">category =</span> <span class="st">&quot;C2&quot;</span>, <span class="at">subcategory =</span> <span class="st">&quot;CGP&quot;</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cgp_gene_sets)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 18</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat gs_name gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 C2     CGP       ABBUD_… Ahnak             66395 ENSMUSG000… AHNAK             79026</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 C2     CGP       ABBUD_… Alcam             11658 ENSMUSG000… ALCAM               214</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 C2     CGP       ABBUD_… Ankrd40           71452 ENSMUSG000… ANKRD40           91369</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 C2     CGP       ABBUD_… Arid1a            93760 ENSMUSG000… ARID1A             8289</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 C2     CGP       ABBUD_… Bckdhb            12040 ENSMUSG000… BCKDHB              594</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 C2     CGP       ABBUD_… AU021092         239691 ENSMUSG000… C16orf89         146556</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat gs_name     gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 C2     CGP       ABBUD_LIF_… Ahnak             66395 ENSMUSG000… AHNAK             79026</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 C2     CGP       ABBUD_LIF_… Alcam             11658 ENSMUSG000… ALCAM               214</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 C2     CGP       ABBUD_LIF_… Ankrd40           71452 ENSMUSG000… ANKRD40           91369</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 C2     CGP       ABBUD_LIF_… Arid1a            93760 ENSMUSG000… ARID1A             8289</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 C2     CGP       ABBUD_LIF_… Bckdhb            12040 ENSMUSG000… BCKDHB              594</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 C2     CGP       ABBUD_LIF_… AU021092         239691 ENSMUSG000… C16orf89         146556</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 10 more variables: human_ensembl_gene &lt;chr&gt;, gs_id &lt;chr&gt;, gs_pmid &lt;chr&gt;,</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   gs_geoid &lt;chr&gt;, gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;,</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   taxon_id &lt;int&gt;, ortholog_sources &lt;chr&gt;, num_ortholog_sources &lt;dbl&gt;</span></span></code></pre></div>
 <p>There is a helper function to show the available collections.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">msigdbr_collections</span>()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 23 x 3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 23 × 3</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    gs_cat gs_subcat         num_genesets</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;                    &lt;int&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 C1     &quot;&quot;                         278</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 C2     &quot;CGP&quot;                     3368</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 C1     &quot;&quot;                         299</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 C2     &quot;CGP&quot;                     3384</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 C2     &quot;CP&quot;                        29</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 C2     &quot;CP:BIOCARTA&quot;              292</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 C2     &quot;CP:KEGG&quot;                  186</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 C2     &quot;CP:PID&quot;                   196</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 C2     &quot;CP:REACTOME&quot;             1604</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 C2     &quot;CP:WIKIPATHWAYS&quot;          615</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 C2     &quot;CP:REACTOME&quot;             1615</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 C2     &quot;CP:WIKIPATHWAYS&quot;          664</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 C3     &quot;MIR:MIRDB&quot;               2377</span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 C3     &quot;MIR:MIR_Legacy&quot;           221</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 C3     &quot;TFT:GTRD&quot;                 523</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 C3     &quot;TFT:GTRD&quot;                 518</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 C3     &quot;TFT:TFT_Legacy&quot;           610</span></span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 C4     &quot;CGN&quot;                      427</span></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 C4     &quot;CM&quot;                       431</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 C5     &quot;GO:BP&quot;                   7481</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 C5     &quot;GO:CC&quot;                    996</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 C5     &quot;GO:MF&quot;                   1708</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 C5     &quot;HPO&quot;                     4813</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 C5     &quot;GO:BP&quot;                   7658</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 C5     &quot;GO:CC&quot;                   1006</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 C5     &quot;GO:MF&quot;                   1738</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 C5     &quot;HPO&quot;                     5071</span></span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 C6     &quot;&quot;                         189</span></span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 C7     &quot;IMMUNESIGDB&quot;             4872</span></span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 C7     &quot;VAX&quot;                      347</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 C8     &quot;&quot;                         671</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 C8     &quot;&quot;                         700</span></span>
 <span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 H      &quot;&quot;                          50</span></span></code></pre></div>
 <p>The <code>msigdbr()</code> function output is a data frame and can be manipulated using more standard methods.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>all_gene_sets <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(gs_cat <span class="sc">==</span> <span class="st">&quot;H&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 18</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat gs_name gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 H      &quot;&quot;        HALLMA… Abca1             11303 ENSMUSG000… ABCA1                19</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 H      &quot;&quot;        HALLMA… Abcb8             74610 ENSMUSG000… ABCB8             11194</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 H      &quot;&quot;        HALLMA… Acaa2             52538 ENSMUSG000… ACAA2             10449</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 H      &quot;&quot;        HALLMA… Acadl             11363 ENSMUSG000… ACADL                33</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 H      &quot;&quot;        HALLMA… Acadm             11364 ENSMUSG000… ACADM                34</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 H      &quot;&quot;        HALLMA… Acads             11409 ENSMUSG000… ACADS                35</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   gs_cat gs_subcat gs_name     gene_symbol entrez_gene ensembl_ge… human_gene… human_entr…</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;int&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 H      &quot;&quot;        HALLMARK_A… Abca1             11303 ENSMUSG000… ABCA1                19</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 H      &quot;&quot;        HALLMARK_A… Abcb8             74610 ENSMUSG000… ABCB8             11194</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 H      &quot;&quot;        HALLMARK_A… Acaa2             52538 ENSMUSG000… ACAA2             10449</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 H      &quot;&quot;        HALLMARK_A… Acadl             11363 ENSMUSG000… ACADL                33</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 H      &quot;&quot;        HALLMARK_A… Acadm             11364 ENSMUSG000… ACADM                34</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 H      &quot;&quot;        HALLMARK_A… Acads             11409 ENSMUSG000… ACADS                35</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 10 more variables: human_ensembl_gene &lt;chr&gt;, gs_id &lt;chr&gt;, gs_pmid &lt;chr&gt;,</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   gs_geoid &lt;chr&gt;, gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;,</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   taxon_id &lt;int&gt;, ortholog_sources &lt;chr&gt;, num_ortholog_sources &lt;dbl&gt;</span></span></code></pre></div>
@@ -296,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="potential-questions-or-concerns" class="section level2">
 <h2>Potential questions or concerns</h2>
 <p><strong>Which version of MSigDB was used?</strong></p>
-<p>This package was generated with MSigDB v7.4 (released April 2021). The MSigDB version is used as the base of the <code>msigdsbr</code> package version. You can check the installed version with <code>packageVersion(&quot;msigdbr&quot;)</code>.</p>
+<p>This package was generated with MSigDB v7.5.1 (released January 2022). The MSigDB version is used as the base of the <code>msigdsbr</code> package version. You can check the installed version with <code>packageVersion(&quot;msigdbr&quot;)</code>.</p>
 <p><strong>Can I download the gene sets directly from MSigDB instead of using this package?</strong></p>
 <p>Yes. You can then import the GMT files (with <code>getGmt()</code> from the <code>GSEABase</code> package, for example). The GMTs only include the human genes, even for gene sets generated from mouse experiments. If you are working with non-human data, you then have to convert the MSigDB genes to your organism or your genes to human.</p>
 <p><strong>Can I convert between human and mouse genes just by adjusting gene capitalization?</strong></p>
@@ -304,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Can I convert human genes to any organism myself instead of using this package?</strong></p>
 <p>Yes. A popular method is using the <code>biomaRt</code> package. You may still end up with dozens of homologs for some genes, so additional cleanup may be helpful.</p>
 <p><strong>Aren’t there already other similar tools?</strong></p>
-<p>There are a few other resources that and provide some of the functionality and served as an inspiration for this package. <a href="http://ge-lab.org/#/data">Ge Lab Gene Set Files</a> has GMT files for many species. <a href="http://bioinf.wehi.edu.au/software/MSigDB/">WEHI</a> provides MSigDB gene sets in R format for human and mouse. <a href="https://github.com/stephenturner/msigdf">MSigDF</a> is based on the WEHI resource, but is converted to a more tidyverse-friendly data frame. These are updated at varying frequencies and may not use the latest version of MSigDB.</p>
+<p>There are a few other resources that and provide some of the functionality and served as an inspiration for this package. <a href="http://ge-lab.org/#/data">Ge Lab Gene Set Files</a> has GMT files for many species. <a href="https://bioinf.wehi.edu.au/software/MSigDB/">WEHI</a> provides MSigDB gene sets in R format for human and mouse. <a href="https://github.com/stephenturner/msigdf">MSigDF</a> is based on the WEHI resource, but is converted to a more tidyverse-friendly data frame. These are updated at varying frequencies and may not use the latest version of MSigDB.</p>
 <p><strong>What if I have other questions?</strong></p>
 <p>You can submit feedback and report bugs on <a href="https://github.com/igordot/msigdbr/issues">GitHub</a>.</p>
 </div>
