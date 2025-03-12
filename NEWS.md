@@ -1,3 +1,21 @@
+# msigdbr 10.0.0
+
+* Removed the MSigDB data (now a separate package msigdbdf).
+* Updated the package versioning scheme so it is not tied to the MSigDB release.
+* Added support for mouse versions of MSigDB (`msigdbr()` gains a `db_species` argument).
+* Updated the annotation fields in the returned gene sets.
+* Updated the `msigdbr()` arguments `gs_cat` and `gs_subcat` to `gs_collection` and `gs_subcollection`.
+
+# msigdbr 2023.1.1
+
+* Based on MSigDB v2023.1.Hs release.
+* Not available on CRAN.
+
+# msigdbr 2022.1.1
+
+* Based on MSigDB v2022.1.Hs release.
+* Not available on CRAN.
+
 # msigdbr 7.5.1
 
 * Based on MSigDB v7.5.1 release.
