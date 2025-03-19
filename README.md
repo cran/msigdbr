@@ -22,12 +22,6 @@ The package can be installed from [CRAN](https://cran.r-project.org/package=msig
 install.packages("msigdbr")
 ```
 
-Recent [releases](https://github.com/igordot/msigdbr/releases) are not available on CRAN and can be installed from GitHub (specific version can be specified):
-
-```r
-remotes::install_github("igordot/msigdbr", ref = "v2022.1.1")
-```
-
 ## Usage
 
 The package data can be accessed using the `msigdbr()` function, which returns a data frame of gene sets and their member genes.
@@ -35,7 +29,7 @@ For example, you can retrieve mouse genes from the C2 (curated) CGP (chemical an
 
 ```r
 library(msigdbr)
-genesets <- msigdbr(species = "mouse", category = "C2", subcategory = "CGP")
+genesets <- msigdbr(species = "mouse", collection = "C2", subcollection = "CGP")
 ```
 
 Check the [documentation website](https://igordot.github.io/msigdbr/articles/msigdbr-intro.html) for more information.
