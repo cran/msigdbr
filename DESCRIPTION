@@ -1,7 +1,7 @@
 Type: Package
 Package: msigdbr
 Title: MSigDB Gene Sets for Multiple Organisms in a Tidy Data Format
-Version: 10.0.1
+Version: 10.0.2
 Authors@R: 
     person("Igor", "Dolgalev", , "igor.dolgalev@nyumc.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4451-126X"))
@@ -25,8 +25,8 @@ Config/Needs/website: rmarkdown
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2025-03-19 03:09:11 UTC; id460
+Packaged: 2025-04-14 21:24:14 UTC; id460
 Author: Igor Dolgalev [aut, cre] (<https://orcid.org/0000-0003-4451-126X>)
 Maintainer: Igor Dolgalev <igor.dolgalev@nyumc.org>
 Repository: CRAN
-Date/Publication: 2025-03-19 04:20:02 UTC
+Date/Publication: 2025-04-14 22:00:02 UTC

@@ -1,7 +1,7 @@
-e751f2770279d6d8c5878fda6fb919e0 *DESCRIPTION
+84a5d5aa5fd610f5f9f4e9d0834d14a0 *DESCRIPTION
 26de50257fa3c3dee73fdfb55f15653b *LICENSE
 e5c61d03741656e928517550e44f5094 *NAMESPACE
-9446636443570e505ef4fc4753ef7969 *NEWS.md
+1f595c128f2a443931a1c45866384d37 *NEWS.md
 42c00de67a40fb5182d9e27c8fab7445 *R/msigdbr-check-data.R
 4118c7b2a40a49d93b7f9ce2fb3fbe10 *R/msigdbr-collections.R
 f02eb49e367a1a021294f58a7e3df873 *R/msigdbr-package.R
@@ -10,7 +10,7 @@ ee8f4be17575cd949d123d7c3f68c50e *R/msigdbr.R
 6686046ac1f9d760ffc553ca923fa088 *R/sysdata.rda
 e4731a0f56887e3f7b751c54254a4b5a *R/zzz.R
 d3591a07af23b1370b1f74a3098accfa *README.md
-4454e632feb75ce4f508807d50b3b12f *build/partial.rdb
+b52aabe9a2757fc86742763db9dafc9b *build/partial.rdb
 391f696f961e28914508628a7af31b74 *man/figures/lifecycle-deprecated.svg
 691b1eb2aec9e1bec96b79d11ba5e631 *man/figures/lifecycle-experimental.svg
 ed42e3fbd7cc30bc6ca8fa9b658e24a8 *man/figures/lifecycle-stable.svg
@@ -21,6 +21,6 @@ b81a181ac5cbd8309022f3d6b4c4794e *man/msigdbr.Rd
 3919698c324cf996ee2efa21d5024e23 *man/msigdbr_collections.Rd
 d5ec8164c4b01a89ba7d2370cc3b6058 *man/msigdbr_species.Rd
 b70f343a667502cb5a63b9a92d047e73 *tests/testthat.R
-f388e50c778a4dfe2d525b858e1399e4 *tests/testthat/test-msigdbr-collections.R
+62eb7a3a5badd58792f1ac95d589503a *tests/testthat/test-msigdbr-collections.R
 641ae7f8817565c90e22e6c402bd3d2e *tests/testthat/test-msigdbr-species.R
-972e3adadf12c81dff8700fb8f077d99 *tests/testthat/test-msigdbr.R
+0a169d47b71526960dbfb437ac627505 *tests/testthat/test-msigdbr.R
