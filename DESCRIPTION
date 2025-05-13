@@ -1,7 +1,7 @@
 Type: Package
 Package: msigdbr
 Title: MSigDB Gene Sets for Multiple Organisms in a Tidy Data Format
-Version: 10.0.2
+Version: 24.1.0
 Authors@R: 
     person("Igor", "Dolgalev", , "igor.dolgalev@nyumc.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4451-126X"))
@@ -17,16 +17,16 @@ License: MIT + file LICENSE
 URL: https://igordot.github.io/msigdbr/
 BugReports: https://github.com/igordot/msigdbr/issues
 Depends: R (>= 4.1)
-Imports: assertthat, babelgene (>= 22.9), dplyr (>= 1.1.1), lifecycle,
-        methods, rlang, tibble, tidyselect (>= 1.2.0)
-Suggests: knitr, msigdbdf, rmarkdown, roxygen2, testthat
-Additional_repositories: https://igordot.r-universe.dev
+Imports: assertthat, babelgene (>= 22.9), curl, dplyr (>= 1.1.1),
+        lifecycle, methods, rlang, tibble, tidyselect (>= 1.2.0), tools
+Suggests: knitr, rmarkdown, roxygen2, testthat
 Config/Needs/website: rmarkdown
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2025-04-14 21:24:14 UTC; id460
-Author: Igor Dolgalev [aut, cre] (<https://orcid.org/0000-0003-4451-126X>)
+Packaged: 2025-05-13 21:00:34 UTC; id460
+Author: Igor Dolgalev [aut, cre] (ORCID:
+    <https://orcid.org/0000-0003-4451-126X>)
 Maintainer: Igor Dolgalev <igor.dolgalev@nyumc.org>
 Repository: CRAN
-Date/Publication: 2025-04-14 22:00:02 UTC
+Date/Publication: 2025-05-13 21:40:01 UTC

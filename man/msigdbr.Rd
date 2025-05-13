@@ -27,7 +27,7 @@ msigdbr(
 \item{subcategory}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} use the \code{subcollection} argument}
 }
 \value{
-A data frame of gene sets with one gene per row.
+A tibble (a data frame with class \code{\link[tibble:tbl_df-class]{tibble::tbl_df}}) of gene sets with one gene per row.
 }
 \description{
 Retrieve a data frame of gene sets and their member genes.
@@ -42,11 +42,6 @@ The versioning convention of MSigDB is in the format \code{Year.Release.Species}
 The genes within each gene set may originate from a species different from the database target species as indicated by the \code{gs_source_species} and \code{db_target_species} fields.
 
 Mouse MSigDB includes gene sets curated from mouse-centric datasets and specified in native mouse gene identifiers, eliminating the need for ortholog mapping.
-
-To access the full dataset, please install the msigdbdf package (not available on CRAN):
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{install.packages("msigdbdf", repos = "https://igordot.r-universe.dev")
-}\if{html}{\out{</div>}}
 }
 \references{
 \url{https://www.gsea-msigdb.org/gsea/msigdb/index.jsp}
