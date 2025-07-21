@@ -11,8 +11,8 @@
 #' Mouse MSigDB includes gene sets curated from mouse-centric datasets and specified in native mouse gene identifiers, eliminating the need for ortholog mapping.
 #'
 #' @param db_species Species abbreviation for the human or mouse databases (`"HS"` or `"MM"`).
-#' @param species Species name for output genes, such as `"Homo sapiens"` or `"Mus musculus"`. Both scientific and common names are acceptable. Use `msigdbr_species()` for the available options.
-#' @param collection Collection abbreviation, such as `"H"` or `"C1"`. Use `msigdbr_collections()` for the available options.
+#' @param species Species name for output genes, such as `"Homo sapiens"` or `"Mus musculus"`. Both scientific and common names are acceptable. Use `msigdbr_species()` to see the available options.
+#' @param collection Collection abbreviation, such as `"H"` or `"C1"`. Use `msigdbr_collections()` to see the available options.
 #' @param subcollection Sub-collection abbreviation, such as `"CGP"` or `"BP"`. Use `msigdbr_collections()` for the available options.
 #' @param category `r lifecycle::badge("deprecated")` use the `collection` argument
 #' @param subcategory `r lifecycle::badge("deprecated")` use the `subcollection` argument
@@ -25,6 +25,19 @@
 #' @importFrom dplyr arrange distinct filter inner_join mutate rename select
 #'
 #' @export
+#'
+#' @examplesIf (identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))
+#' # Get all human gene sets
+#' gs <- msigdbr()
+#' head(gs)
+#'
+#' # Get all mouse gene sets
+#' gs <- msigdbr(db_species = "MM", species = "Mus musculus")
+#' head(gs)
+#'
+#' # Get CGP (chemical and genetic perturbations) gene sets with genes mapped to rat orthologs
+#' gs <- msigdbr(species = "Rattus norvegicus", collection = "C2", subcollection = "CGP")
+#' head(gs)
 msigdbr <- function(db_species = "HS", species = "human", collection = NULL, subcollection = NULL, category = deprecated(), subcategory = deprecated()) {
   # Check parameters
   assertthat::assert_that(

@@ -4,14 +4,19 @@
 \alias{msigdbr_collections}
 \title{List the collections available in the msigdbr package}
 \usage{
-msigdbr_collections(db_species = "Hs")
+msigdbr_collections(db_species = "HS")
 }
 \arguments{
-\item{db_species}{Species abbreviation for the human or mouse databases (\code{"Hs"} or \code{"Mm"}).}
+\item{db_species}{Species abbreviation for the human or mouse databases (\code{"HS"} or \code{"MM"}).}
 }
 \value{
 A data frame of the available collections.
 }
 \description{
 List the collections available in the msigdbr package
+}
+\examples{
+\dontshow{if ((identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+msigdbr_collections()
+\dontshow{\}) # examplesIf}
 }

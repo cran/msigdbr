@@ -16,9 +16,9 @@ msigdbr(
 \arguments{
 \item{db_species}{Species abbreviation for the human or mouse databases (\code{"HS"} or \code{"MM"}).}
 
-\item{species}{Species name for output genes, such as \code{"Homo sapiens"} or \code{"Mus musculus"}. Both scientific and common names are acceptable. Use \code{msigdbr_species()} for the available options.}
+\item{species}{Species name for output genes, such as \code{"Homo sapiens"} or \code{"Mus musculus"}. Both scientific and common names are acceptable. Use \code{msigdbr_species()} to see the available options.}
 
-\item{collection}{Collection abbreviation, such as \code{"H"} or \code{"C1"}. Use \code{msigdbr_collections()} for the available options.}
+\item{collection}{Collection abbreviation, such as \code{"H"} or \code{"C1"}. Use \code{msigdbr_collections()} to see the available options.}
 
 \item{subcollection}{Sub-collection abbreviation, such as \code{"CGP"} or \code{"BP"}. Use \code{msigdbr_collections()} for the available options.}
 
@@ -40,6 +40,21 @@ Starting with release 2022.1, MSigDB incorporated a database of mouse-native gen
 Each one is provided in the approved gene symbols of its respective species.
 
 Mouse MSigDB includes gene sets curated from mouse-centric datasets and specified in native mouse gene identifiers, eliminating the need for ortholog mapping.
+}
+\examples{
+\dontshow{if ((identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get all human gene sets
+gs <- msigdbr()
+head(gs)
+
+# Get all mouse gene sets
+gs <- msigdbr(db_species = "MM", species = "Mus musculus")
+head(gs)
+
+# Get CGP (chemical and genetic perturbations) gene sets with genes mapped to rat orthologs
+gs <- msigdbr(species = "Rattus norvegicus", collection = "C2", subcollection = "CGP")
+head(gs)
+\dontshow{\}) # examplesIf}
 }
 \references{
 \url{https://www.gsea-msigdb.org/gsea/msigdb/index.jsp}
