@@ -21,9 +21,6 @@
 #'
 #' @references <https://www.gsea-msigdb.org/gsea/msigdb/index.jsp>
 #'
-#' @importFrom babelgene orthologs
-#' @importFrom dplyr arrange distinct filter inner_join mutate rename select
-#'
 #' @export
 #'
 #' @examplesIf (identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))
@@ -38,58 +35,85 @@
 #' # Get CGP (chemical and genetic perturbations) gene sets with genes mapped to rat orthologs
 #' gs <- msigdbr(species = "Rattus norvegicus", collection = "C2", subcollection = "CGP")
 #' head(gs)
-msigdbr <- function(db_species = "HS", species = "human", collection = NULL, subcollection = NULL, category = deprecated(), subcategory = deprecated()) {
+msigdbr <- function(
+  db_species = "HS",
+  species = "human",
+  collection = NULL,
+  subcollection = NULL,
+  category = deprecated(),
+  subcategory = deprecated()
+) {
   # Check parameters
-  assertthat::assert_that(
+  assert_that(
     is.character(db_species),
     length(db_species) == 1,
     nchar(db_species) == 2
   )
   db_species <- toupper(db_species)
-  assertthat::assert_that(
+  assert_that(
     is.character(species),
     length(species) == 1,
     nchar(species) > 1
   )
   if (!is.null(collection)) {
-    assertthat::assert_that(
+    assert_that(
       is.character(collection),
       length(collection) == 1,
       nchar(collection) > 0
     )
   }
   if (!is.null(subcollection)) {
-    assertthat::assert_that(
+    assert_that(
       is.character(subcollection),
       length(subcollection) == 1,
       nchar(subcollection) > 0
     )
   }
 
-  # Define name variants for species with caveats
-  species_hs <- c("Homo sapiens", "human")
-  species_mm <- c("Mus musculus", "mouse", "house mouse")
+  # Define name variants for species with caveats (matched case-insensitively)
+  species_hs <- c("homo sapiens", "human")
+  species_mm <- c("mus musculus", "mouse", "house mouse")
 
   # Use only mouse genes for mouse database
-  if (db_species == "MM" && !(species %in% species_mm)) {
+  if (db_species == "MM" && !(tolower(species) %in% species_mm)) {
     stop("Use `species = \"mouse\"` when selecting the mouse database.")
   }
 
   # Display a message when selecting the human database and mouse genes
-  if (db_species == "HS" && species %in% species_mm) {
+  if (db_species == "HS" && tolower(species) %in% species_mm) {
     mm_msg <- "Using human MSigDB with ortholog mapping to mouse. Use `db_species = \"MM\"` for mouse-native gene sets."
-    rlang::inform(message = mm_msg, .frequency = "once", .frequency_id = "msigdbr_species_mm")
+    rlang::inform(
+      message = mm_msg,
+      .frequency = "once",
+      .frequency_id = "msigdbr_species_mm"
+    )
   }
 
   # Check for deprecated category arguments
-  if (lifecycle::is_present(category) && !is.null(category)) {
-    lifecycle::deprecate_warn("10.0.0", "msigdbr(category)", "msigdbr(collection)")
-    assertthat::assert_that(is.character(category), length(category) == 1, nchar(category) > 0)
+  if (is_present(category) && !is.null(category)) {
+    lifecycle::deprecate_warn(
+      "10.0.0",
+      "msigdbr(category)",
+      "msigdbr(collection)"
+    )
+    assert_that(
+      is.character(category),
+      length(category) == 1,
+      nchar(category) > 0
+    )
     collection <- category
   }
-  if (lifecycle::is_present(subcategory) && !is.null(subcategory)) {
-    lifecycle::deprecate_warn("10.0.0", "msigdbr(subcategory)", "msigdbr(subcollection)")
-    assertthat::assert_that(is.character(subcategory), length(subcategory) == 1, nchar(subcategory) > 0)
+  if (is_present(subcategory) && !is.null(subcategory)) {
+    lifecycle::deprecate_warn(
+      "10.0.0",
+      "msigdbr(subcategory)",
+      "msigdbr(subcollection)"
+    )
+    assert_that(
+      is.character(subcategory),
+      length(subcategory) == 1,
+      nchar(subcategory) > 0
+    )
     subcollection <- subcategory
   }
 
@@ -102,7 +126,17 @@ msigdbr <- function(db_species = "HS", species = "human", collection = NULL, sub
     if (subcollection %in% mdb$gs_subcollection) {
       mdb <- dplyr::filter(mdb, .data$gs_subcollection == subcollection)
     } else if (subcollection %in% gsub(".*:", "", mdb$gs_subcollection)) {
-      mdb <- dplyr::filter(mdb, gsub(".*:", "", .data$gs_subcollection) == subcollection)
+      mdb <- dplyr::filter(
+        mdb,
+        gsub(".*:", "", .data$gs_subcollection) == subcollection
+      )
+      if (dplyr::n_distinct(mdb$gs_subcollection) > 1) {
+        stop(
+          "Ambiguous subcollection, multiple matches: ",
+          toString(sort(unique(mdb$gs_subcollection)))
+        )
+      }
+      subcollection <- unique(mdb$gs_subcollection)
     } else {
       stop("Unknown subcollection.")
     }
@@ -121,9 +155,16 @@ msigdbr <- function(db_species = "HS", species = "human", collection = NULL, sub
   )
 
   # Retrieve orthologs for the non-human species for the human database
-  if (db_species == "HS" && !(species %in% species_hs)) {
+  if (db_species == "HS" && !(tolower(species) %in% species_hs)) {
     species_id <- babelgene::species(species)$taxon_id
-    orthologs_key <- paste0("orthologs", species_id)
+    orthologs_key <- paste(
+      "orthologs",
+      species_id,
+      collection,
+      subcollection,
+      sep = "."
+    )
+    # Load from cache if available
     if (exists(orthologs_key, envir = pkg_env, inherits = FALSE)) {
       species_genes <- pkg_env[[orthologs_key]]
     } else {
@@ -174,10 +215,15 @@ msigdbr <- function(db_species = "HS", species = "human", collection = NULL, sub
     "gs_subcollection",
     everything()
   )
-  mdb <- dplyr::arrange(mdb, .data$gs_name, .data$db_gene_symbol, .data$gene_symbol)
+  mdb <- dplyr::arrange(
+    mdb,
+    .data$gs_name,
+    .data$db_gene_symbol,
+    .data$gene_symbol
+  )
 
   # Add columns from the old msigdbr output if old arguments are present
-  if (lifecycle::is_present(category) || lifecycle::is_present(subcategory)) {
+  if (is_present(category) || is_present(subcategory)) {
     mdb <- dplyr::mutate(
       mdb,
       entrez_gene = .data$ncbi_gene,

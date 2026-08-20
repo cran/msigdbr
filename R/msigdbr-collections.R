@@ -4,20 +4,18 @@
 #'
 #' @return A data frame of the available collections.
 #'
-#' @importFrom dplyr arrange count distinct
-#'
 #' @export
 #'
 #' @examplesIf (identical(Sys.getenv("NOT_CRAN"), "true") || identical(Sys.getenv("IN_PKGDOWN"), "true"))
 #' msigdbr_collections()
 msigdbr_collections <- function(db_species = "HS") {
   # Check parameters
-  assertthat::assert_that(
+  assert_that(
     is.character(db_species),
     length(db_species) == 1,
     nchar(db_species) == 2
   )
-  db_species <- toupper(db_species)
+  db_species <- match.arg(toupper(db_species), choices = c("HS", "MM"))
 
   # Get data summary (from memory cache or disk)
   cache_info <- check_cache()

@@ -16,7 +16,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Igor Dolgalev \email{igor.dolgalev@nyumc.org} (\href{https://orcid.org/0000-0003-4451-126X}{ORCID})
+\strong{Maintainer}: Igor Dolgalev \email{igor.dolgalev@nyumc.org} (\href{https://orcid.org/0000-0003-4451-126X}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Igor Dolgalev \email{igor.dolgalev@nyumc.org} (\href{https://orcid.org/0000-0003-4451-126X}{ORCID}) [copyright holder]
+}
 
 }
 \keyword{internal}

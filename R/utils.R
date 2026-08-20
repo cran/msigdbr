@@ -1,4 +1,5 @@
 # Create a package-level environment for caching
+# To check environment contents: ls(msigdbr:::pkg_env)
 pkg_env <- new.env(parent = emptyenv())
 
 #' Load the gene sets database
@@ -10,10 +11,13 @@ pkg_env <- new.env(parent = emptyenv())
 #'
 #' @return A data frame of gene sets and their member genes.
 #'
-#' @importFrom dplyr bind_rows distinct
-#'
 #' @noRd
-load_gene_sets <- function(target_species = c("HS", "MM"), collection = NULL, overwrite = FALSE, verbose = FALSE) {
+load_gene_sets <- function(
+  target_species = c("HS", "MM"),
+  collection = NULL,
+  overwrite = FALSE,
+  verbose = FALSE
+) {
   target_species <- match.arg(toupper(target_species), choices = c("HS", "MM"))
 
   data_info <- check_cache(overwrite = overwrite, verbose = verbose)
@@ -22,7 +26,12 @@ load_gene_sets <- function(target_species = c("HS", "MM"), collection = NULL, ov
   summary <- read_cached_rds(data_info$summary_rds, verbose = verbose)
 
   # Simplify summary table
-  summary <- dplyr::distinct(summary, .data$db_target_species, .data$gs_collection, .data$df_rds)
+  summary <- dplyr::distinct(
+    summary,
+    .data$db_target_species,
+    .data$gs_collection,
+    .data$df_rds
+  )
 
   # Filter summary table by species
   summary <- summary[summary$db_target_species == target_species, ]
@@ -31,7 +40,10 @@ load_gene_sets <- function(target_species = c("HS", "MM"), collection = NULL, ov
   if (!is.null(collection)) {
     summary <- summary[summary$gs_collection == collection, ]
     if (nrow(summary) == 0) {
-      stop("Unknown collection (use `msigdbr_collections()` to see the available options): ", collection)
+      stop(
+        "Unknown collection (use `msigdbr_collections()` to see the available options): ",
+        collection
+      )
     }
   }
 
@@ -49,10 +61,6 @@ load_gene_sets <- function(target_species = c("HS", "MM"), collection = NULL, ov
 #' @param timeout Maximum time in seconds for the download to complete.
 #'
 #' @return A list of information about the data release.
-#'
-#' @importFrom curl curl_download new_handle
-#' @importFrom tools md5sum R_user_dir
-#' @importFrom utils unzip
 #'
 #' @noRd
 check_cache <- function(overwrite = FALSE, verbose = FALSE, timeout = 600) {
@@ -75,27 +83,45 @@ check_cache <- function(overwrite = FALSE, verbose = FALSE, timeout = 600) {
   zip_name <- sub("\\?.*$", "", basename(release$zip_url))
   zip_path <- file.path(release$cache_dir, zip_name)
   if (!file.exists(zip_path) || overwrite) {
+    message("Downloading gene sets (first use only, may take a few minutes)...")
+
+    # Download to a temp file to prevent partial downloads from being cached
+    tmp_path <- tempfile(fileext = ".zip")
+    on.exit(unlink(tmp_path), add = TRUE)
     if (verbose) {
-      message("Downloading zip archive to: ", zip_path)
+      message("Downloading zip archive to: ", tmp_path)
     }
     curl::curl_download(
       url = release$zip_url,
-      destfile = zip_path,
+      destfile = tmp_path,
       quiet = !verbose,
       handle = curl::new_handle(timeout = timeout)
     )
 
-    # Verify checksum
-    if (tools::md5sum(zip_path) != release$zip_md5) {
-      file.remove(zip_path)
-      stop("Downloaded file does not match the expected checksum.")
+    # Check the md5 checksum of the zip file
+    if (tools::md5sum(tmp_path) != release$zip_md5) {
+      stop("Downloaded zip file does not match the expected checksum.")
     }
 
-    # Extract files from the zip archive
-    if (verbose) {
-      message("Extracting zip archive to: ", release$cache_dir)
+    # Skip if another process already finished populating the cache
+    if (!file.exists(zip_path) || overwrite) {
+      if (verbose) {
+        message("Moving zip archive to: ", zip_path)
+      }
+      # file.rename() fails silently across filesystems
+      if (!file.rename(tmp_path, zip_path)) {
+        if (verbose) {
+          message("Rename failed, falling back to file copy.")
+        }
+        file.copy(tmp_path, zip_path, overwrite = TRUE)
+      }
+
+      # Extract files from the zip archive
+      if (verbose) {
+        message("Extracting zip archive to: ", release$cache_dir)
+      }
+      utils::unzip(zip_path, exdir = release$cache_dir)
     }
-    utils::unzip(zip_path, exdir = release$cache_dir)
   }
 
   # Check that the expected summary file exists
@@ -114,8 +140,6 @@ check_cache <- function(overwrite = FALSE, verbose = FALSE, timeout = 600) {
 #' @param verbose A logical indicating whether to print progress information.
 #'
 #' @return The object stored in the RDS file.
-#'
-#' @importFrom tools R_user_dir
 #'
 #' @noRd
 read_cached_rds <- function(x, verbose = FALSE) {
